@@ -1,8 +1,11 @@
 package com.example.demo.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer idOrder;
 	private String title;
 	private String description;
