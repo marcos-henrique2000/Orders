@@ -19,7 +19,7 @@ public class ClientService {
 		Optional<Client> obj = repo.findById(id);
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! ID: " + id + ", Tipo: " + Client.class.getName()));
+				"Cliente não encontrado! ID: " + id + ", Tipo: " + Client.class.getName()));
 	}
 	
 }
