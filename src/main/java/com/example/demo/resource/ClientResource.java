@@ -17,7 +17,7 @@ public class ClientResource {
 	@Autowired
 	private ClientService service;
 	
-	@RequestMapping(value="/id", method = RequestMethod.GET)
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
 		Client obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
