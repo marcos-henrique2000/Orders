@@ -1,13 +1,17 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.example.demo.entities.enums.Department;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Client implements Serializable {
@@ -17,7 +21,11 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	private Department department;
+	private String department;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
 	
 	public Client() {}
 
@@ -25,7 +33,7 @@ public class Client implements Serializable {
 		super();
 		this.id = idClient;
 		this.name = name;
-		this.department = department;
+		this.department = department.name();
 	}
 
 	public Integer getIdClient() {
@@ -44,12 +52,20 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public Department getDepartment() {
+	public String getDepartment() {
 		return department;
 	}
 
 	public void setDepartment(Department department) {
-		this.department = department;
+		this.department = department.name();
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override
