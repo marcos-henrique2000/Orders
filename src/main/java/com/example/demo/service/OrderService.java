@@ -39,4 +39,16 @@ public class OrderService {
 		return obj;
 	}
 	
+	public Order update(Order obj) {
+		Order newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(Order newObj, Order obj) {
+		newObj.setClient(obj.getClient());
+		newObj.setDateOrder(obj.getDateOrder());
+		newObj.setDescription(obj.getDescription());
+		newObj.setTitle(obj.getTitle());
+	}
 }
