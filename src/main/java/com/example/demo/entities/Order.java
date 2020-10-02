@@ -41,11 +41,11 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
-	public Integer getIdOrder() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setIdOrder(Integer idOrder) {
+	public void setId(Integer idOrder) {
 		this.id = idOrder;
 	}
 
