@@ -55,7 +55,7 @@ public class Client implements Serializable {
 	public String getDepartment() {
 		return department;
 	}
-
+	
 	public void setDepartment(Department department) {
 		this.department = department.name();
 	}
@@ -67,7 +67,7 @@ public class Client implements Serializable {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,5 +91,9 @@ public class Client implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public Department getDepartment(String department) {
+		return Department.valueOf(Department.class, department);
 	}
 }

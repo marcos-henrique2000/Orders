@@ -36,4 +36,16 @@ public class ClientService {
 		return obj;
 	}
 	
+	public Client update(Client obj) {
+		Client newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(Client newObj, Client obj) {
+		newObj.setDepartment(obj.getDepartment(obj.getDepartment()));
+		newObj.setName(obj.getName());
+		newObj.setOrders(obj.getOrders());
+	}
+	
 }
