@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,17 @@ public class ClientService {
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Cliente não encontrado! ID: " + id + ", Tipo: " + Client.class.getName()));
+	}
+
+	public List<Client> findAll() {
+		List<Client> obj = repo.findAll();
+		return obj;
+	}
+	
+	@Transactional
+	public Client insert(Client obj) {
+		repo.save(obj);
+		return obj;
 	}
 	
 }

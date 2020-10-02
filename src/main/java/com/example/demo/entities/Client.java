@@ -36,11 +36,11 @@ public class Client implements Serializable {
 		this.department = department.name();
 	}
 
-	public Integer getIdClient() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setIdClient(Integer idClient) {
+	public void setId(Integer idClient) {
 		this.id = idClient;
 	}
 
