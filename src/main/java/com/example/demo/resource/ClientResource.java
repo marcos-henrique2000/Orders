@@ -2,6 +2,7 @@ package com.example.demo.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.DTO.ClientDTO;
 import com.example.demo.entities.Client;
 import com.example.demo.service.ClientService;
 
@@ -29,9 +31,10 @@ public class ClientResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> findlAll(){
-		List<Client> obj = service.findAll();
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<List<ClientDTO>> findlAll(){
+		List<Client> list = service.findAll();
+		List<ClientDTO> listDTO = list.stream().map(obj -> new ClientDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
