@@ -6,10 +6,12 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.ClientRepository;
 import com.example.demo.entities.Client;
+import com.example.demo.service.exceptions.DataIntegrityException;
 import com.example.demo.service.exceptions.ObjectNotFoundException;
 
 @Service 
@@ -48,4 +50,14 @@ public class ClientService {
 		newObj.setOrders(obj.getOrders());
 	}
 	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException  e) {
+			throw new DataIntegrityException("Não é possivel excluir um cliente que possui pedidos");
+		}catch (Exception e) {
+			e.getMessage();
+		}
+	}
 }
