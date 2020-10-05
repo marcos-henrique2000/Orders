@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.OrderRepository;
 import com.example.demo.entities.Order;
+import com.example.demo.service.exceptions.DataIntegrityException;
 import com.example.demo.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -50,5 +51,14 @@ public class OrderService {
 		newObj.setDateOrder(obj.getDateOrder());
 		newObj.setDescription(obj.getDescription());
 		newObj.setTitle(obj.getTitle());
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}catch(DataIntegrityException e) {
+			throw new DataIntegrityException("Não é possivel excluir o pedido");
+		}
 	}
 }
