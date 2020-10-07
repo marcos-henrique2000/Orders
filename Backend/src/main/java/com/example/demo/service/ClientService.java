@@ -7,18 +7,23 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.ClientRepository;
 import com.example.demo.entities.Client;
 import com.example.demo.service.exceptions.DataIntegrityException;
 import com.example.demo.service.exceptions.ObjectNotFoundException;
+import com.sun.javafx.scene.traversal.Direction;
 
 @Service 
 public class ClientService {
 	
 	@Autowired
 	private ClientRepository repo;
+	
+	
 	
 	public Client find(Integer id) {
 		Optional<Client> obj = repo.findById(id);
@@ -60,4 +65,12 @@ public class ClientService {
 			e.getMessage();
 		}
 	}
+	
+	/*
+	public Page<Client> search(String name, List<Integer> ids, int page, int linePerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linePerPage, Direction.valueOf(direction), orderBy);
+		
+		return repo.search(name, pageRequest);
+	}
+	*/
 }
